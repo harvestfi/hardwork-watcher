@@ -89,6 +89,19 @@ export class Addresses {
         '&address='
       this.scanUrl = 'https://era.zksync.network/'
       this.discord = config.zksync.discord
+    } else if (net == 'hyperevm') {
+      this.network = 'HyperEVM'
+      this.chainId = '999'
+      this.controller = '0x292eB9d147566F6c6777f55Ff2b632D4673Ced29'
+      this.profitToken = '0xBe6727B535545C67d5cAa73dEa54865B92CF7907'
+      this.profitTokenName = 'UETH'
+      this.profitShare = '0xCD719739C3Ece8b576D649BE97195aD03e676a2c'
+      this.scanApiUrl =
+        'https://api.etherscan.io/v2/api?chainid=999&module=contract&action=getsourcecode&apikey=' +
+        config.hyperevm.scanKey +
+        '&address='
+      this.scanUrl = 'https://hyperevmscan.io/'
+      this.discord = config.hyperevm.discord
     } else {
       throw Error('Unknown network ' + net)
     }

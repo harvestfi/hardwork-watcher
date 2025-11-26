@@ -319,5 +319,59 @@ export class Listener {
       )
       console.log('Subscribed to zksync controller events.')
     }
+
+    const hyperevmEnabled = config.hyperevm.enabled || false
+    if (hyperevmEnabled) {
+      const hyperevmProvider = new ethers.providers.JsonRpcProvider(config.hyperevm.provider)
+      const hyperevmLookback = config.hyperevm.lookbackHarvests || false
+      const hyperevmAddresses = new Addresses('hyperevm')
+      const hyperevmController = Controller__factory.connect(
+        hyperevmAddresses.controller,
+        hyperevmProvider,
+      )
+      const hyperevmControllerHandler = new ControllerHandler(
+        hyperevmProvider,
+        cacheProvider.instance(),
+      )
+      if (hyperevmLookback) {
+        const lastBlock = Utils.getLastBlock(hyperevmAddresses.chainId)
+        console.log('Starting with hyperevm lookback from block ' + lastBlock)
+        const events = await hyperevmController.queryFilter(
+          hyperevmController.filters.SharePriceChangeLog(),
+          lastBlock,
+          'latest',
+        )
+
+        for (const event of events) {
+          await hyperevmControllerHandler.handleHardWork(
+            event.args.vault,
+            event.args.strategy,
+            event.args.oldSharePrice,
+            event.args.newSharePrice,
+            event.args.timestamp,
+            await event.getTransactionReceipt(),
+            hyperevmAddresses,
+          )
+          await Utils.sleep(500)
+        }
+        console.log('hyperevm lookback done.')
+      }
+
+      hyperevmController.on(
+        hyperevmController.filters.SharePriceChangeLog(),
+        async (vault, strategy, oldSharePrice, newSharePrice, timestamp, event) => {
+          await hyperevmControllerHandler.handleHardWork(
+            vault,
+            strategy,
+            oldSharePrice,
+            newSharePrice,
+            timestamp,
+            await event.getTransactionReceipt(),
+            hyperevmAddresses,
+          )
+        },
+      )
+      console.log('Subscribed to hyperevm controller events.')
+    }
   }
 }
