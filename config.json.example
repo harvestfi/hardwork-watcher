@@ -2,7 +2,7 @@
   "port": "",
   "eth": {
     "enabled": true,
-    "provider": "https://eth-mainnet.alchemyapi.io/v2/key",
+    "provider": "https://eth-mainnet.g.alchemy.com/v2/KEY",
     "scanKey": "etherscan_key",
     "discord": "https://discord.com/api/webhooks/KEY",
     "lookbackHarvests": true
@@ -10,15 +10,36 @@
   "polygon": {
     "enabled": true,
     "provider": "https://polygon-mainnet.g.alchemy.com/v2/KEY",
-    "scanKey": "polygonscan_key",
+    "scanKey": "etherscan_key",
     "discord": "https://discord.com/api/webhooks/KEY",
     "lookbackHarvests": true
   },
-  "bsc": {
+  "arbitrum": {
     "enabled": true,
-    "provider": "https://bsc.getblock.io/mainnet/?api_key=KEY",
-    "scanKey": "bscscan_key",
+    "provider": "https://arb-mainnet.g.alchemy.com/v2/KEY",
+    "scanKey": "etherscan_key",
     "discord": "https://discord.com/api/webhooks/KEY",
-    "lookbackHarvests": false
+    "lookbackHarvests": true
+  },
+  "base": {
+    "enabled": true,
+    "provider": "https://base-mainnet.g.alchemy.com/v2/KEY",
+    "scanKey": "etherscan_key",
+    "discord": "https://discord.com/api/webhooks/KEY",
+    "lookbackHarvests": true
+  },
+  "zksync": {
+    "enabled": true,
+    "provider": "https://zksync-mainnet.g.alchemy.com/v2/KEY",
+    "scanKey": "etherscan_key",
+    "discord": "https://discord.com/api/webhooks/KEY",
+    "lookbackHarvests": true
+  },
+  "hyperevm": {
+    "enabled": true,
+    "provider": "https://hyperliquid-mainnet.g.alchemy.com/v2/KEY",
+    "scanKey": "etherscan_key",
+    "discord": "https://discord.com/api/webhooks/KEY",
+    "lookbackHarvests": true
   }
 }

@@ -37,19 +37,6 @@ export class Addresses {
         '&address='
       this.scanUrl = 'https://polygonscan.com/'
       this.discord = config.polygon.discord
-    } else if (net == 'bsc') {
-      this.network = 'BSC'
-      this.chainId = '56'
-      this.controller = '0x222412af183BCeAdEFd72e4Cb1b71f1889953b1C'
-      this.profitToken = '0x2170Ed0880ac9A755fd29B2688956BD959F933F8'
-      this.profitTokenName = 'WETH'
-      this.profitShare = '0xf00dD244228F51547f0563e60bCa65a30FBF5f7f'
-      this.scanApiUrl =
-        'https://api.etherscan.io/v2/api?chainid=56&module=contract&action=getsourcecode&apikey=' +
-        config.bsc.scanKey +
-        '&address='
-      this.scanUrl = 'https://bscscan.com/'
-      this.discord = config.bsc.discord
     } else if (net == 'arbitrum') {
       this.network = 'Arbitrum'
       this.chainId = '42161'
