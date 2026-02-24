@@ -89,12 +89,16 @@ export class ControllerHandler {
     const cacheKey = chainId + '_' + address.toLowerCase()
     const cachedValue = this.cache.get(cacheKey)
     if (cachedValue == undefined) {
-      const proxy = StrategyProxy__factory.connect(address, this.provider)
-      const implementation = await proxy.implementation()
       let url: string
-      if (utils.isAddress(implementation)) {
-        url = scanApiUrl + implementation
-      } else {
+      try {
+        const proxy = StrategyProxy__factory.connect(address, this.provider)
+        const implementation = await proxy.implementation()
+        if (utils.isAddress(implementation)) {
+          url = scanApiUrl + implementation
+        } else {
+          url = scanApiUrl + address
+        }
+      } catch {
         url = scanApiUrl + address
       }
       const response = await Utils.downloadFile(url)

@@ -7,3 +7,4 @@ last-block.json
 tokens-cache.json
 dist/
 types/
+listener-state.json
